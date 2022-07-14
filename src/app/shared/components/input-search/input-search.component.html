@@ -1,0 +1,18 @@
+<div class="filter_component_wrapper">
+
+    <form [formGroup]="searchForm" class="search_form">
+        <div>
+
+            <input type="text" class="input_search" placeholder="Search" formControlName="input_search">
+
+            <span *ngIf="searchForm.controls['input_search'].value" class="close_icon" (click)="handleReset()">
+            </span>
+            <app-accordion-icon accordion_icon>
+            </app-accordion-icon>
+        </div>
+        <app-accordion accordion>
+            <!-- accordion form  -->
+        </app-accordion>
+    </form>
+
+</div>

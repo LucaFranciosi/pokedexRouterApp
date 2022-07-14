@@ -1,0 +1,17 @@
+:host.user_toolTip {
+    visibility: hidden;
+
+    .tooltiptext {
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        font-size: 12px;
+        top: -22px;
+        right: 20px;
+        z-index: 1;
+    }
+}

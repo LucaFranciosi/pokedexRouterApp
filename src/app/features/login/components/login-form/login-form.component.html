@@ -1,0 +1,53 @@
+<form class="form-container" [formGroup]="form">
+
+    <div class="form-control">
+        <label for="customEmailInput">Email
+            <input type="text" class="input" name="email" id="email" formControlName="email">
+        </label>
+        <div *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)"
+            class="error">
+            <small class="text-danger" *ngIf="form.get('email').hasError('required')">
+                This field is required.
+            </small>
+            <small class="text-danger" *ngIf="form.get('email').hasError('email')">
+                This is a valid email example test@gmail.com
+            </small>
+        </div>
+    </div>
+    <div class="form-control">
+        <label for="password" class="label_password"> Password
+            <div class="password_container">
+                <input type={{this.type}} class="input password" name="password" id="password_input"
+                    formControlName="password">
+                <span (click)="handleClick()" [ngClass]="{'eye': true, 'open': isOpen }"></span>
+            </div>
+        </label>
+        <div *ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)"
+            class="error">
+            <small class="text-danger" *ngIf="form.get('password').hasError('hasNumber')">Password must contain at least
+                a number</small>
+            <small class="text-danger" *ngIf="form.get('password').hasError('hasCapitalCase')">Password must contain at
+                least a capital letter</small>
+            <small class="text-danger" *ngIf="form.get('password').hasError('hasSmallCase')">Password must contain at
+                least
+                a small caracter</small>
+            <small class="text-danger" *ngIf="form.get('password').hasError('hasSpecialCharacters')">Password must
+                contain at least a special character</small>
+            <small class="text-danger" *ngIf="form.get('password').hasError('required')">
+                This field is required.
+            </small>
+        </div>
+    </div>
+
+    <!--     <pre>{{this.form|json}}</pre>
+ -->
+
+    <div class="form-control button_container">
+        <button class="button submit_button" [disabled]="form.invalid || form.untouched"
+            (click)="loginButtonClick()">Sign in </button>
+    </div>
+    <a href="/registration">Sign up</a>
+
+
+
+</form>

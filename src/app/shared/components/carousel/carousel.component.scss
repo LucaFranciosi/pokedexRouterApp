@@ -1,0 +1,63 @@
+.carousel_container {
+    margin: 0 auto;
+    width: 360px;
+    height: 640px;
+    position: relative;
+
+    .next {
+        background: url("../../../../assets/img/fwd_arrow.svg") no-repeat;
+        position: absolute;
+        height: 17px;
+        width: 17px;
+        top: 193px;
+        left: 330px;
+        z-index: 5;
+        &.nav_btn {
+            cursor: pointer;
+            display: block;
+        }
+    }
+    /* The Close Button */
+    .close {
+        background: url("../../../../assets/img/back_arrow.svg") center no-repeat;
+        position: absolute;
+        height: 17px;
+        width: 17px;
+        top: 31px;
+        left: 27px;
+        z-index: 5;
+        cursor: pointer;
+    }
+    .prev {
+        background: url("../../../../assets/img/previous.svg");
+        position: absolute;
+        height: 14px;
+        width: 8px;
+        top: 193px;
+        right: 330px;
+        z-index: 10;
+        &.nav_btn {
+            cursor: pointer;
+            display: block;
+        }
+    }
+
+    .carousel {
+        text-align: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        width: 360px;
+        height: 640px;
+        box-sizing: border-box;
+    }
+    .item {
+        display: block;
+        position: relative;
+        font-family: "Poppins";
+        background: url("../../../../assets/img/back_pokeball.svg") 144px 8px no-repeat;
+        height: 100%;
+        border-radius: 1.2rem;
+        text-align: center;
+        box-sizing: border-box;
+    }
+}

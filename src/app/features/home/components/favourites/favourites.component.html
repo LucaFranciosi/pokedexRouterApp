@@ -1,0 +1,12 @@
+<div>
+    <h1 style="margin:2.5rem;">FAVOURITES</h1>
+    <div class="miniature_wrapper">
+        <div *ngFor="let pokemon of this.pokemonSrv.currentListValue
+|filteredListPipe     
+|async 
+let i= index;">
+            <app-card [pokemon]="pokemon" [i]="i">
+            </app-card>
+        </div>
+    </div>
+</div>

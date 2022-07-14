@@ -1,0 +1,15 @@
+.layout-container {
+    display: flex;
+    width: 100vw;
+    .title {
+        font-weight: bold;
+        font-size: 5rem;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
+        .pokeball {
+            height: 5rem;
+        }
+    }
+}

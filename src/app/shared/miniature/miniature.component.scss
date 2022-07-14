@@ -1,0 +1,256 @@
+@import "src/utils/variables-scss/variables";
+* {
+    box-sizing: border-box;
+}
+.miniature {
+    position: relative;
+    height: 112px;
+    width: 104px;
+    height: 112px;
+    background: #ffffff;
+    border: 1px solid;
+    border-radius: 8px;
+    .caption {
+        overflow: hidden;
+    }
+    &.rock {
+        border-color: $rock;
+        .apex {
+            color: $rock;
+        }
+        .caption {
+            background-color: $rock;
+        }
+    }
+    &.ghost {
+        border-color: $ghost;
+        .apex {
+            color: $ghost;
+        }
+        .caption {
+            background-color: $ghost;
+        }
+    }
+    &.steel {
+        border-color: $steel;
+        .apex {
+            color: $steel;
+        }
+        .caption {
+            background-color: $steel;
+        }
+    }
+    &.water {
+        border-color: $water;
+        .apex {
+            color: $water;
+        }
+        .caption {
+            background-color: $water;
+        }
+    }
+    &.grass {
+        border-color: $grass;
+        .apex {
+            color: $grass;
+        }
+        .caption {
+            background-color: $grass;
+        }
+    }
+    &.psychic {
+        border-color: $psychic;
+        .apex {
+            color: $psychic;
+        }
+        .caption {
+            background-color: $psychic;
+        }
+    }
+    &.ice {
+        border-color: $ice;
+        .apex {
+            color: $ice;
+        }
+        .caption {
+            background-color: $ice;
+        }
+    }
+    &.dark {
+        border-color: $dark;
+        .apex {
+            color: $dark;
+        }
+        .caption {
+            background-color: $dark;
+        }
+    }
+    &.fairy {
+        border-color: $fairy;
+        .apex {
+            color: $fairy;
+        }
+        .caption {
+            background-color: $fairy;
+        }
+    }
+    &.normal {
+        border-color: $normal;
+        .apex {
+            color: $normal;
+        }
+        .caption {
+            background-color: $normal;
+        }
+    }
+    &.fighting {
+        border-color: $fighting;
+        .apex {
+            color: $fighting;
+        }
+        .caption {
+            background-color: $fighting;
+        }
+    }
+    &.flying {
+        border-color: $flying;
+        .apex {
+            color: $flying;
+        }
+        .caption {
+            background-color: $flying;
+        }
+    }
+    &.poison {
+        border-color: $poison;
+        .apex {
+            color: $poison;
+        }
+        .caption {
+            background-color: $poison;
+        }
+    }
+    &.ground {
+        border-color: $ground;
+        .apex {
+            color: $ground;
+        }
+        .caption {
+            background-color: $ground;
+        }
+    }
+    &.bug {
+        border-color: $bug;
+        .apex {
+            color: $bug;
+        }
+        .caption {
+            background-color: $bug;
+        }
+    }
+    &.fire {
+        border-color: $fire;
+        .apex {
+            color: $fire;
+        }
+        .caption {
+            background-color: $fire;
+        }
+    }
+    &.electric {
+        border-color: $electric;
+        .apex {
+            color: $electric;
+        }
+        .caption {
+            background-color: $electric;
+        }
+    }
+    &.dragon {
+        border-color: $dragon;
+        .apex {
+            color: $dragon;
+        }
+        .caption {
+            background-color: $dragon;
+        }
+    }
+    .heart {
+        position: absolute;
+        cursor: pointer;
+        height: 1rem;
+        width: 1rem;
+        top: 0.5rem;
+        left: 0.5rem;
+        background: url("../../../assets/img/heart.svg");
+        background-size: cover;
+        &.fav {
+            background: url("../../../assets/img/heart_full.svg") no-repeat;
+        }
+    }
+
+    .caption {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        bottom: 0;
+        font-family: "Poppins", sans-serif;
+        font-style: normal;
+        font-size: 10px;
+        width: 100%;
+        height: 24px;
+        border-radius: 0px 0px 7px 7px;
+        text-align: center;
+        padding: 4px 0 0 0;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+    .apex {
+        font-family: "Poppins", sans-serif;
+        font-size: 8px;
+        height: 12px;
+        text-align: end;
+        padding: 4px 8px 0 0;
+    }
+    .div_img {
+        text-align: center;
+        height: 72px;
+        img {
+            width: 72px;
+            cursor: pointer;
+        }
+    }
+}
+@media screen and (min-width: 768px) {
+    .miniature {
+        border: 2px solid;
+        min-width: 20.8rem;
+        height: 22.4rem;
+
+        .heart {
+            height: 2rem;
+            width: 2rem;
+            top: 1.2rem;
+            left: 1.6rem;
+        }
+        .div_img {
+            min-height: 144px;
+            position: relative;
+
+            img {
+                width: 144px;
+                min-height: 144px;
+            }
+        }
+        .apex {
+            font-size: 16px;
+            min-height: 24px;
+            padding: 8px 16px 0 0;
+        }
+        .caption {
+            height: 48px;
+            font-size: 20px;
+            padding: 8px 0 0 0;
+        }
+    }
+}

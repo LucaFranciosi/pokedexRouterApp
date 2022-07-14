@@ -1,0 +1,16 @@
+<div class="navBar">
+
+    <div class="side_menu_content" style="overflow: hidden" [@collapsable]="this.navBarStatus">
+        <img class="close_menu" src="../../../../assets/img/X.svg" alt="X" (click)="this.closeMenu()">
+        <ul>
+            <li class='nav_li'>
+                <a routerLink="/" routerLinkActive="active">Home</a>
+            </li>
+            <li class='nav_li'>
+                <a class='active' routerLink="/favourites" routerLinkActive="active">Favourites</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<div *ngIf="this.navBarStatus ==='opened'" class='overlay' (click)='this.closeMenu()'></div>

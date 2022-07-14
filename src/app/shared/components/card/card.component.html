@@ -1,0 +1,88 @@
+<div  class='item' [ngClass]="this.pokemon.types[0].type.name">
+
+
+
+    <!-- header -->
+    <div class='header'>
+        <h1 id='card_title'>{{pokemon.name|titlecase}}</h1>
+        <span class='card_index'>#{{formatPokemonId()}}</span>
+    </div>
+    <!--  -->
+    <img class="pokeImage" src='https://assets.pokemon.com/assets/cms2/img/pokedex/full/{{pokemonId}}.png'
+        alt="pokeName">
+    <div id="info">
+        <div id="type_container">
+            <span id="type1" [ngClass]="pokemon.types[0].type.name">{{(pokemon.types[0].type.name)|titlecase}}</span>
+
+            <span *ngIf="pokemon.types[1] !== undefined" id="type2"
+                [ngClass]="pokemon.types[1].type.name">{{pokemon.types[1]?.type.name|titlecase}}</span>
+
+        </div>
+        <div id="about">
+            <h3 [ngClass]="pokemon.types[0].type.name">About</h3>
+        </div>
+        <div class="container_about">
+
+
+            <div class='about_info first'>
+                <div class='dynamic'>
+                    <img src='../../../../assets/img/scale.svg' alt="heigth">
+                    <span id="weight">{{pokemon.weight}} g</span>
+                </div>
+                <div class='card_caption'>Weight</div>
+            </div>
+            <div class='about_info second'>
+                <div class='dynamic'>
+                    <img src='../../../../assets/img/meter.svg' alt="heigth" />
+                    <span id="heigth">{{pokemon.height}} cm</span>
+                </div>
+                <div class='card_caption'>Heigth</div>
+            </div>
+            <div class='about_info third'>
+                <div class='dynamic'>
+                    <span id="moves">{{pokemon.moves[0].move.name|json}}, {{pokemon.moves[1]?.move.name|json}}</span>
+                </div>
+                <div class='card_caption'>Moves</div>
+
+
+            </div>
+
+        </div>
+        <div class='description'>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque
+            volutpat
+            mattis eros. Nullam malesuada erat ut turpis. </div>
+        <div class="stats" [ngClass]='pokemon.types[0].type.name'>
+            <div id="base_stats">Base Stats</div>
+        </div>
+        <div class='abilities'>
+            <div class='specs acronym' [ngClass]='pokemon.types[0].type.name'>
+                <ul>
+                    <li>HP</li>
+                    <li>ATK</li>
+                    <li>DEF</li>
+                    <li>SATK</li>
+                    <li>SDEF</li>
+                    <li>SPD</li>
+                </ul>
+            </div>
+            <div class='specs' id="points">
+
+                <ul>
+                    <li *ngFor="let stat of pokemon.stats; let i = index;">{{stat.base_stat|json}}
+                    </li>
+                </ul>
+            </div>
+            <div class='specs' id="bars">
+
+                <div *ngFor="let stat of this.stats; let i = index;" class='prog_container'
+                    [ngClass]='pokemon.types[0].type.name'>
+
+                    <div class="dynamic_prog" [ngClass]='pokemon.types[0].type.name' [ngStyle]="{'width': stat+'%'}">
+
+                    </div><!--  -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+.modal {
+    position: fixed;
+    z-index: 2;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 5vh;
+    padding-bottom: 2vh;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}

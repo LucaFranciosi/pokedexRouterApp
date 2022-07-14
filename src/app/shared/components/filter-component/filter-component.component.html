@@ -1,0 +1,64 @@
+<div class="filter_component_wrapper">
+
+    <form [formGroup]="filterForm" class="filter_form">
+
+        <div class="input_search_wrapper">
+            <input type="text" class="input_search" placeholder="Search" formControlName="input_search">
+            <app-accordion-icon [isAccordionOpen]="isAccordionOpen"
+                (isAccordionOpenChange)="handleAccordionStatus($event)"></app-accordion-icon>
+        </div>
+
+
+        <div class="accordion">
+            <!-- ACCORDION FORM/BODY COLLAPSPABLE -->
+            <div class="accordion_form" [@collapsable]="isAccordionOpen">
+
+                <div class="accordion_session" id="accordion_session1">
+
+                    <div class="session_title">Sorting Options</div>
+                    <ul>
+                        <input type="radio" value="id" formControlName="order" name="order">Id
+                        <input type="radio" value="name" formControlName="order" name="order">Name
+                    </ul>
+                </div>
+
+
+                <div class="accordion_session" id="accordion_session2">
+                    <div class="session_title">PokeTypes</div>
+                    <ul formArrayName="pokeTypesControls" *ngVar="this.uniqueTypeMatrix as matrix">
+
+                        <li *ngFor="let control of this.pokeTypesControls.controls; let i = index">
+
+                            <input type="checkBox" [id]='matrix[i]' [value]="matrix[i]" [formControlName]="i"
+                                (change)="onCheckStateChange($event,i)">
+                            <label class='label' [for]=" matrix[i]"
+                                [ngClass]="this.retrieveType(i) !== null? matrix[i] : ''">{{matrix[i]|titlecase}}</label>
+
+                        </li>
+
+                    </ul>
+                    <div class="button_div"><button name='clear' [disabled]="this.filterForm.untouched"
+                            (click)=clear()>Clear</button>
+                    </div>
+                </div>
+                <div class="accordion_session" id="accordion_session3">
+                    <div class="session_title">Favourites</div>
+                    <div class="switch">
+                        <input type="checkbox" id='switch-1' formControlName="favourites" class="switch-input">
+                        <label for="switch-1" class="switch-label"></label>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <pre>{{this.filterForm.value|json}}</pre>
+
+
+
+    </form>
+</div>

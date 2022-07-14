@@ -1,1 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
+/* html {
+    box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+} */
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+small {
+    display: block;
+}
+.main_content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.miniature_wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    height: 100%;
+    max-height: 40rem;
+    justify-content: center;
+    padding: 3rem 2rem 3rem 2rem;
+    border: solid 0.3rem #8080802e;
+    border-radius: 10px;
+    box-shadow: none;
+    overflow: auto;
+    margin: 4rem 1.6rem 0 1.6rem;
+    align-items: center;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .miniature_wrapper {
+        gap: 16px;
+        padding: 6rem 3.5rem 6rem 3.5rem;
+        margin-top: 4rem;
+        max-height: 50rem;
+    }
+}

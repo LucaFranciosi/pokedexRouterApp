@@ -1,0 +1,21 @@
+<header>
+    <div class='logo_type'>
+        <div class='burger_icon' (click)="handleClick()"></div>
+        <div class='title_container'>
+            <h1 class='title'>
+                <img id="pokeball" src="../../../../assets/img/pokeball.svg" alt="Pokeball" /> Pokedex
+            </h1>
+        </div>
+        <div class="loggedUser">
+            <div class=" userDiv">
+                <ng-container *ngIf="this.auth.currentUserValue">
+                    <app-tool-tip class="user_toolTip" [user]="this.auth.currentUserValue">
+                    </app-tool-tip>
+                </ng-container>
+            </div>
+            <div class="logOutDiv" (click)="logout()"></div>
+        </div>
+    </div>
+    <hr class='bar' />
+    <app-navbar [navBarStatus]="navBarStatus" (navBarStatusChange)="openMenuFromHeader($event)"></app-navbar>
+</header>

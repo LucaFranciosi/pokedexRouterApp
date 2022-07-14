@@ -1,0 +1,12 @@
+<div class='miniature' [ngClass]="this.pokemon.types[0].type.name">
+    <div class='heart' [ngClass]="{'fav': isFavourite === true  }" (click)="this.pushPreferences(pokemon.id)"></div>
+    <div class="apex">#{{pokemonId}}
+    </div>
+    <div class='div_img'>
+        <img src='https://assets.pokemon.com/assets/cms2/img/pokedex/full/{{pokemonId}}.png' alt=''
+            (click)='openModal(i)'>
+    </div>
+    <div class='caption' (click)='openModal(i)'>{{
+        pokemon.name| titlecase }}
+    </div>
+</div>
