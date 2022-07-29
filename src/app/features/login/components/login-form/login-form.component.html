@@ -1,4 +1,4 @@
-<form class="form-container" [formGroup]="form">
+<form class="form-container" [formGroup]="form" (submit)="loginButtonClick()" (keyup.enter)=" this.loginButtonClick()">
 
     <div class="form-control">
         <label for="customEmailInput">Email
@@ -15,13 +15,13 @@
         </div>
     </div>
     <div class="form-control">
-        <label for="password" class="label_password"> Password
-            <div class="password_container">
+        <div class="password_container">
+            <label for="password"> Password
                 <input type={{this.type}} class="input password" name="password" id="password_input"
                     formControlName="password">
-                <span (click)="handleClick()" [ngClass]="{'eye': true, 'open': isOpen }"></span>
-            </div>
-        </label>
+            </label>
+            <span (click)="handleClick()" [ngClass]="{'eye': true, 'open': isOpen }"></span>
+        </div>
         <div *ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)"
             class="error">
             <small class="text-danger" *ngIf="form.get('password').hasError('hasNumber')">Password must contain at least
@@ -39,12 +39,9 @@
         </div>
     </div>
 
-    <!--     <pre>{{this.form|json}}</pre>
- -->
 
     <div class="form-control button_container">
-        <button class="button submit_button" [disabled]="form.invalid || form.untouched"
-            (click)="loginButtonClick()">Sign in </button>
+        <input type='submit' class="button submit_button" [disabled]="form.untouched || form.invalid" value="Login">
     </div>
     <a href="/registration">Sign up</a>
 

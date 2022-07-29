@@ -1,13 +1,20 @@
 .modal {
     position: fixed;
-    z-index: 2;
+    z-index: 1;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 5vh;
-    padding-bottom: 2vh;
+    padding-top: 2rem;
+    padding-bottom: 5rem;
     top: 0;
     left: 0;
+
     cursor: pointer;
+    .modal_content {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }

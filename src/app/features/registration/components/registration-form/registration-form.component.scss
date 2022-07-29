@@ -38,26 +38,21 @@
     label {
         font-weight: bold;
     }
-    .label_password {
+    .password_container {
+        position: relative;
         min-width: 25rem;
 
-        .password_container {
-            position: relative;
-            min-width: 25rem;
-            width: 100%;
-
-            .eye {
-                position: absolute;
-                height: 1.6rem;
-                width: 1.6rem;
-                top: 31%;
-                right: 1vw;
-                background: url("../../../../../assets/img/eyeClosed.svg");
+        .eye {
+            position: absolute;
+            height: 1.6rem;
+            width: 1.6rem;
+            top: 3.7rem;
+            right: 1.1rem;
+            background: url("../../../../../assets/img/eyeClosed.svg");
+            background-size: cover;
+            &.open {
+                background: url("../../../../../assets/img/eyeOpen.svg");
                 background-size: cover;
-                &.open {
-                    background: url("../../../../../assets/img/eyeOpen.svg");
-                    background-size: cover;
-                }
             }
         }
     }

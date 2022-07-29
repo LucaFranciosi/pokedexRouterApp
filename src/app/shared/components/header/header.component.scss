@@ -1,7 +1,9 @@
 header {
+    width: 100vw;
     height: 7rem;
     .bar {
         border: solid 1px #a9a9a936;
+        margin: 0;
     }
     .logo_type {
         font-family: "Poppins", sans-serif;
@@ -42,13 +44,6 @@ header {
                 visibility: visible;
                 transition: visibility, 0.2s ease;
             }
-
-            /* :host ::ng-deep span {
-                visibility: hidden;
-            }
-            &:hover :host {
-                visibility: visible;
-            } */
         }
         .logOutDiv {
             height: 26px;

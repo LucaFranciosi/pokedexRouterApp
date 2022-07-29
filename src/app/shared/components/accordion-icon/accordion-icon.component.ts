@@ -1,27 +1,5 @@
-import { Component, Directive, ElementRef, HostBinding, HostListener, EventEmitter, Input, OnInit, Output } from '@angular/core';
-@Directive({
-  selector: '[appAccordionIconDir]'
-})
-export class AccordionIconDirective   {
-  imgPath: string;
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-  constructor(private el: ElementRef) {
-    this.imgPath = '../../../../assets/img/slider_';
-  }
-
-  @HostBinding('isAccordionOpen') isAccordionOpen!: string;
-
-   
-  @HostListener('click') onClick() {
-    if (this.isAccordionOpen === 'open') {
-      this.isAccordionOpen = 'closed'
-      this.el.nativeElement.style.backgroundImage = "url('../../../../assets/img/slider_closed.png')";
-    } else {
-      this.isAccordionOpen = 'open';
-      this.el.nativeElement.style.backgroundImage = "url('../../../../assets/img/slider_opened.png')";
-    }
-  }
-}
 @Component({
   selector: 'app-accordion-icon',
   templateUrl: './accordion-icon.component.html',

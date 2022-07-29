@@ -11,7 +11,7 @@ import { CarouselService } from 'src/app/shared/services/carousel-service/carous
 })
 export class MiniatureComponent implements OnInit {
   @Input() i: number;
-  @Input() pokemon!: Pokemon;
+  @Input() pokemon: Pokemon;
   @Input() modalStatus: boolean = false;
   @Output() modalStatusChange = new EventEmitter<boolean>();
   pokemonId: string;
@@ -24,7 +24,9 @@ export class MiniatureComponent implements OnInit {
   ngOnInit(): void {
     this.i === this.pokemon.id;
     this.pokemonId = this.formatPokemonId();
+    this.isFavourite = false;
     this.isFavourite = this.auth.currentUserValue.preferences?.indexOf(this.pokemon.id) !== -1;
+
   }
   openModal(param: number) {
     this.carouselSrv.updateCurrentIndex(param);

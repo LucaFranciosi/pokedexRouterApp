@@ -1,12 +1,24 @@
-<div>
-    <h1 style="margin:2.5rem;">FAVOURITES</h1>
-    <div class="miniature_wrapper">
-        <div *ngFor="let pokemon of this.pokemonSrv.currentListValue
-|filteredListPipe     
-|async 
-let i= index;">
-            <app-card [pokemon]="pokemon" [i]="i">
-            </app-card>
-        </div>
+<div class="main_content">
+    <h1>FAVOURITES</h1>
+    <div class="miniature_wrapper" style="gap: 16px; text-align: center; min-height: 60rem;">
+        <ng-container *ngIf='this.auth.currentUserValue.preferences.length === 0; then noResults; else fav'>
+        </ng-container>
     </div>
+
+
+    <ng-template #noResults>
+        <p>NO RESULTS FOUND<br>PLEASE ADD SOME FAVOURITES</p>
+    </ng-template>
+    <ng-template #fav>
+        <ng-container *ngFor="let pokemon of this.pokemonSrv.currentListValue 
+        let i= index;">
+
+            <app-card *ngIf="this.auth.currentUserValue.preferences.indexOf(pokemon.id) !== -1;" [pokemon]="pokemon"
+                [i]=i>
+            </app-card>
+        </ng-container>
+
+    </ng-template>
+
+
 </div>

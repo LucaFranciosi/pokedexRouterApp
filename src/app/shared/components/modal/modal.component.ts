@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 
 
 @Component({
@@ -22,5 +23,10 @@ import { Component, Input } from '@angular/core';
 })
 export class ModalComponent {
   @Input() modalStatus: boolean = false;
+  @Output() modalStatusChange = new EventEmitter();
   constructor() { }
+
+  close() {
+    return this.modalStatusChange.emit(false)
+  }
 }

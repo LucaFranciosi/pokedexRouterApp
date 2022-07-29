@@ -4,6 +4,9 @@
 
         <div class="input_search_wrapper">
             <input type="text" class="input_search" placeholder="Search" formControlName="input_search">
+            <span *ngIf="filterForm.controls['input_search'].value" class="close_icon" id='close_icon'
+                (click)="clear($event)">
+            </span>
             <app-accordion-icon [isAccordionOpen]="isAccordionOpen"
                 (isAccordionOpenChange)="handleAccordionStatus($event)"></app-accordion-icon>
         </div>
@@ -16,31 +19,40 @@
                 <div class="accordion_session" id="accordion_session1">
 
                     <div class="session_title">Sorting Options</div>
-                    <ul>
+                    <div class="inputs_wrapper">
                         <input type="radio" value="id" formControlName="order" name="order">Id
                         <input type="radio" value="name" formControlName="order" name="order">Name
-                    </ul>
+                    </div>
                 </div>
 
 
                 <div class="accordion_session" id="accordion_session2">
                     <div class="session_title">PokeTypes</div>
-                    <ul formArrayName="pokeTypesControls" *ngVar="this.uniqueTypeMatrix as matrix">
 
-                        <li *ngFor="let control of this.pokeTypesControls.controls; let i = index">
+                    <div formArrayName="pokeTypesControls" *ngVar="this.uniqueTypeMatrix as matrix"
+                        class="pokeTypesControls">
+
+                        <div *ngFor="let control of this.pokeTypesControls.controls; let i = index"
+                            class="inputs_wrapper">
 
                             <input type="checkBox" [id]='matrix[i]' [value]="matrix[i]" [formControlName]="i"
                                 (change)="onCheckStateChange($event,i)">
                             <label class='label' [for]=" matrix[i]"
-                                [ngClass]="this.retrieveType(i) !== null? matrix[i] : ''">{{matrix[i]|titlecase}}</label>
+                                [ngClass]="this.retrieveControlValue(i) !== null? matrix[i] : ''">{{matrix[i]|titlecase}}
+                            </label>
 
-                        </li>
+                        </div>
 
-                    </ul>
-                    <div class="button_div"><button name='clear' [disabled]="this.filterForm.untouched"
-                            (click)=clear()>Clear</button>
                     </div>
+
+                    <div class="button_div">
+                        <button name='clear' id='clear' (click)=clear($event)
+                            [disabled]="buttonClearDisabled">Clear</button>
+                        <button [disabled]="buttonSelectAllDisabled" (click)="selectAll()"> Select All </button>
+                    </div>
+
                 </div>
+
                 <div class="accordion_session" id="accordion_session3">
                     <div class="session_title">Favourites</div>
                     <div class="switch">
@@ -55,8 +67,6 @@
         </div>
 
 
-
-        <pre>{{this.filterForm.value|json}}</pre>
 
 
 

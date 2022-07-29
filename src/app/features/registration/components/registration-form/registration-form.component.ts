@@ -1,4 +1,4 @@
-import { Component,   OnInit, } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { CustomValidator } from 'src/app/custom-validators/custom-validator';
@@ -21,16 +21,16 @@ export class RegistrationFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.createForm();
-
     this.type = "password"
     this.isOpen = false;
   }
+
   handleClick() {
     this.type === "password" ? this.type = "text" : this.type = "password";
     this.isOpen === false ? this.isOpen = true : this.isOpen = false;
   }
 
-  regButtonClick() { this.auth.register(this.form.value) }
+  regButtonClick(event: SubmitEvent) { this.auth.register(this.form.value) }
 
 
 

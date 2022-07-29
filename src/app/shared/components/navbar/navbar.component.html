@@ -4,10 +4,11 @@
         <img class="close_menu" src="../../../../assets/img/X.svg" alt="X" (click)="this.closeMenu()">
         <ul>
             <li class='nav_li'>
-                <a routerLink="/" routerLinkActive="active">Home</a>
+                <a routerLink="/" routerLinkActive="active" (click)="this.closeMenu()">Home</a>
             </li>
             <li class='nav_li'>
-                <a class='active' routerLink="/favourites" routerLinkActive="active">Favourites</a>
+                <a class='active' routerLink="/favourites" routerLinkActive="active"
+                    (click)="this.closeMenu()">Favourites</a>
             </li>
 
         </ul>

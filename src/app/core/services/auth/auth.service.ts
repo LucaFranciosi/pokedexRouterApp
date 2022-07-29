@@ -21,14 +21,7 @@ export class AuthService {
     public currentUser$: Observable<User>
     error: any
 
-    /*  user: User = {
-         first_name: '',
-         last_name: '',
-         password: '',
-         preferences: [],
-         email: '',
-         token: ''
-     } */
+
 
     constructor(
         private http: HttpClient,
@@ -37,6 +30,7 @@ export class AuthService {
     ) {
         this.currentUserSubject = new BehaviorSubject<User>(null)
         this.currentUser$ = this.currentUserSubject.asObservable()
+
     }
 
     // function to get the currentUserValue as an object of type User as a return. 
@@ -110,6 +104,7 @@ export class AuthService {
             fav => {
                 this.currentUserValue.preferences = fav;
                 this.updateUser(this.currentUserValue);
+                console.log(this.currentUserValue)
             }
         )
     }

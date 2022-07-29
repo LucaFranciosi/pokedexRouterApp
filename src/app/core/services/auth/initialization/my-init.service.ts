@@ -29,10 +29,10 @@ export class MyInitService {
         this.http.get<User>('http://localhost:4001/welcome', httpOptions).subscribe(
           res => {
             this.data = { ...res, token }
-            subscriber.next(this.data)//DEBUGGARE
+            subscriber.next(this.data)
             this.authService.updateUser(this.data)
             this.router.navigate([""])
-          })
+          });
       }
       catch (e) {
         subscriber.error(e)

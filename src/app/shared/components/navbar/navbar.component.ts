@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output, } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { User } from 'src/app/model/user/user.model';
 
@@ -27,6 +27,10 @@ export class NavbarComponent implements OnInit {
   public user: User;
   @Input() navBarStatus: string;
   @Output() navBarStatusChange = new EventEmitter<string>();
+  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    this.closeMenu();
+  }
+
 
   constructor(private auth: AuthService) {
     this.auth.currentUser$.subscribe(u => u = this.user);

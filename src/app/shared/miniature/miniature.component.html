@@ -1,5 +1,9 @@
-<div class='miniature' [ngClass]="this.pokemon.types[0].type.name">
-    <div class='heart' [ngClass]="{'fav': isFavourite === true  }" (click)="this.pushPreferences(pokemon.id)"></div>
+<div class='miniature' [class]="this.pokemon.types[0].type.name">
+    <div *ngIf="this.auth.currentUserValue.preferences?.indexOf(this.pokemon.id) === -1; else fav" class='heart'
+        (click)="pushPreferences(pokemon.id)"></div>
+    <ng-template #fav>
+        <div class='heart fav' (click)="pushPreferences(pokemon.id)"></div>
+    </ng-template>
     <div class="apex">#{{pokemonId}}
     </div>
     <div class='div_img'>

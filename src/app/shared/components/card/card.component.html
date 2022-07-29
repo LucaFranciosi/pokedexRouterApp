@@ -1,4 +1,4 @@
-<div  class='item' [ngClass]="this.pokemon.types[0].type.name">
+<div class='item' [class]="this.pokemon.types[0].type.name">
 
 
 
@@ -19,7 +19,7 @@
 
         </div>
         <div id="about">
-            <h3 [ngClass]="pokemon.types[0].type.name">About</h3>
+            <h3 [class]="pokemon.types[0].type.name">About</h3>
         </div>
         <div class="container_about">
 
@@ -51,11 +51,11 @@
         <div class='description'>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque
             volutpat
             mattis eros. Nullam malesuada erat ut turpis. </div>
-        <div class="stats" [ngClass]='pokemon.types[0].type.name'>
+        <div class="stats" [class]='pokemon.types[0].type.name'>
             <div id="base_stats">Base Stats</div>
         </div>
         <div class='abilities'>
-            <div class='specs acronym' [ngClass]='pokemon.types[0].type.name'>
+            <div class='specs acronym' [class]='pokemon.types[0].type.name'>
                 <ul>
                     <li>HP</li>
                     <li>ATK</li>
@@ -75,9 +75,9 @@
             <div class='specs' id="bars">
 
                 <div *ngFor="let stat of this.stats; let i = index;" class='prog_container'
-                    [ngClass]='pokemon.types[0].type.name'>
+                    [class]='pokemon.types[0].type.name'>
 
-                    <div class="dynamic_prog" [ngClass]='pokemon.types[0].type.name' [ngStyle]="{'width': stat+'%'}">
+                    <div class="dynamic_prog" [class]='pokemon.types[0].type.name' [ngStyle]="{'width': stat+'%'}">
 
                     </div><!--  -->
 

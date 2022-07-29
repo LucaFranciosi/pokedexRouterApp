@@ -1,26 +1,29 @@
 <app-spinner *ngIf="this.pokemonSrv.loadingValue"></app-spinner>
 
 <div class="main_content">
-    <div class="search_options">
-        <app-filter-component></app-filter-component>
-    </div>
+
+    <app-filter-component></app-filter-component>
+
+
 
 
 
     <div class="miniature_wrapper">
-        <app-miniature *ngFor="let pokemon of this.pokemonSrv.currentListValue
-    |filteredListPipe
-    |async 
+        <app-miniature *ngFor="let pokemon of this.pokemonSrv.currentList|async
     let i= index;" [i]='i' [pokemon]="pokemon" [modalStatus]="modalStatus"
             (modalStatusChange)="handleModalFromHome($event)">
         </app-miniature>
+        <p *ngIf="(this.pokemonSrv.currentList|async).length === 0">NO RESULTS FOUND</p>
     </div>
 
 
 
 </div>
 
-<app-modal [modalStatus]="modalStatus">
+<app-modal [modalStatus]="modalStatus" (modalStatusChange)="handleModalFromHome($event)">
+
     <app-carousel [modalStatus]="modalStatus" (modalStatusChange)="handleModalFromHome($event)">
     </app-carousel>
+    <ng-template #showThat>
+    </ng-template>
 </app-modal>

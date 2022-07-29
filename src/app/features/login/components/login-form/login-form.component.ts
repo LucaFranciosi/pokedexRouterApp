@@ -44,6 +44,7 @@ export class LoginFormComponent {
 
       password: new FormControl(null, {
         validators: [
+          Validators.required,
           CustomValidator.patternValidator(/\d/, { hasNumber: true, }),
           CustomValidator.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
           CustomValidator.patternValidator(/[a-z]/, { hasSmallCase: true }),
@@ -53,9 +54,9 @@ export class LoginFormComponent {
           Validators.maxLength(20)
 
         ],
-        updateOn: 'blur'
+        updateOn: 'change'
       }),
-    })
+    }, { updateOn: 'change' })
   }
 
 

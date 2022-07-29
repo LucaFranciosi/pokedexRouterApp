@@ -4,12 +4,12 @@
         <div *ngIf="this.carouselSrv.currentIndexValue!==0;" class='prev nav_btn' id="back_arrow"
             (click)="slide('REV')">
         </div>
-        <div *ngIf="this.carouselSrv.currentIndexValue < this.carouselSrv.getCaroLength(this.pokemonSrv, this.auth) -1 "
+        <div *ngIf="this.carouselSrv.currentIndexValue < (this.pokemonSrv.currentList|async).length -1 "
             class='next nav_btn' id="fwd_arrow" (click)="slide('FFW')">
         </div>
     </div>
     <div class='carousel'>
-        <div *ngFor="let pokemon of this.pokemonSrv.currentListValue  |filteredListPipe |async let i=index;">
+        <div *ngFor="let pokemon of this.pokemonSrv.currentList|async  let i=index;">
             <app-card *ngIf="i === this.carouselSrv.currentIndexValue" [pokemon]="pokemon" [i]='i'>
             </app-card>
         </div>

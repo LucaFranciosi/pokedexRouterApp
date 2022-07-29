@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/* import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { PokemonService } from 'src/app/core/services/pokemon/pokemon.service';
@@ -45,3 +45,4 @@ export class InputSearchComponent implements OnInit {
 
 
 }
+ 

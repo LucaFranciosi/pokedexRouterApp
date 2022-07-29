@@ -1,5 +1,6 @@
+import { Pokemon } from "src/app/model/pokemon/pokemon.model";
 
-const sortBy = (key: string, list: any[]) => {
+const sortBy = (key: string, list: any[] | Pokemon[]) => {
     return list.sort(compareValues(key));
 }
 
