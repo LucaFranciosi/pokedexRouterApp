@@ -1,27 +1,21 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { Subject } from "rxjs";
 
-import { Pokemon } from "src/app/model/pokemon/pokemon.model";
 
 @Injectable({ providedIn: 'root' })
 
 export class CarouselService {
-    filteredList: Pokemon[];
-    currentIndex = new BehaviorSubject<number>(0)
-    index$: Observable<number>;
-
+    currentIndexSubject: Subject<number> = new Subject<number>()
     constructor() {
-        this.index$ = this.currentIndex.asObservable()
+        this.currentIndexSubject.next(0)
     }
 
 
-    get currentIndexValue() {
-        return this.currentIndex.value;
+    getcurrentIndexSubject() {
+        return this.currentIndexSubject;
     }
 
-    updateCurrentIndex(param: number) {
-        return this.currentIndex.next(param)
-    }
+
 
 
 }

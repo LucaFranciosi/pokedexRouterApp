@@ -1,19 +1,21 @@
-<app-spinner *ngIf="this.pokemonSrv.loadingValue"></app-spinner>
+<app-spinner *ngIf="fake.loading"></app-spinner>
 
 <div class="main_content">
-
     <app-filter-component></app-filter-component>
 
-
-
-
-
     <div class="miniature_wrapper">
-        <app-miniature *ngFor="let pokemon of this.pokemonSrv.currentList|async
-    let i= index;" [i]='i' [pokemon]="pokemon" [modalStatus]="modalStatus"
+
+
+        <app-miniature *ngFor="let pokemon of currentList;
+            let i= index;" [i]='i' [pokemon]="pokemon" [modalStatus]="modalStatus"
             (modalStatusChange)="handleModalFromHome($event)">
         </app-miniature>
-        <p *ngIf="(this.pokemonSrv.currentList|async).length === 0">NO RESULTS FOUND</p>
+
+
+        <ng-container>
+            <p *ngIf="currentList.length === 0 && !this.fake.loading">NO RESULTS FOUND</p>
+            <div *ngIf="this.fake.loading " id="loadingImg"></div>
+        </ng-container>
     </div>
 
 
@@ -24,6 +26,5 @@
 
     <app-carousel [modalStatus]="modalStatus" (modalStatusChange)="handleModalFromHome($event)">
     </app-carousel>
-    <ng-template #showThat>
-    </ng-template>
+
 </app-modal>

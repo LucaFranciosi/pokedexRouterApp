@@ -17,13 +17,13 @@ import { FilterComponentComponent } from './components/filter-component/filter-c
 import { AccordionComponent } from './components/accordion-component/accordion.component';
 import { VarDirective } from './directives/ng-var.directive';
 import { AccordionIconDirective } from './directives/accordion-icon.directive';
- 
+
 @NgModule({
   declarations: [
     //Layout Components
     MainComponent,
     BannerComponent,
-    NavbarComponent, 
+    NavbarComponent,
     HeaderComponent,
 
     // Home page Components
@@ -40,7 +40,7 @@ import { AccordionIconDirective } from './directives/accordion-icon.directive';
     ToolTipComponent,
     AccordionIconComponent,
     FilterComponentComponent,
- 
+
 
 
     //Directives
@@ -80,7 +80,7 @@ import { AccordionIconDirective } from './directives/accordion-icon.directive';
     ToolTipComponent,
     AccordionIconComponent,
     FilterComponentComponent,
- 
+
 
 
     //Directives

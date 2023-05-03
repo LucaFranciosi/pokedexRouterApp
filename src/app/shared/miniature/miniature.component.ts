@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, } from '@angular/core';
+import { Subject } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { PokemonService } from 'src/app/core/services/pokemon/pokemon.service';
 import { Pokemon } from 'src/app/model/pokemon/pokemon.model';
+import { User } from 'src/app/model/user/user.model';
 import { CarouselService } from 'src/app/shared/services/carousel-service/carousel.service';
 
 @Component({
@@ -14,22 +16,26 @@ export class MiniatureComponent implements OnInit {
   @Input() pokemon: Pokemon;
   @Input() modalStatus: boolean = false;
   @Output() modalStatusChange = new EventEmitter<boolean>();
+  userSubject: Subject<User> = this.auth.getUserSubject()
   pokemonId: string;
-  public isFavourite: boolean;
+  isFavourite: boolean;
 
-  constructor(public pokemonSrv: PokemonService, public auth: AuthService, public carouselSrv: CarouselService) { }
+
+  constructor(public pokemonSrv: PokemonService, public auth: AuthService, public carouselSrv: CarouselService) {
+  }
 
 
 
   ngOnInit(): void {
     this.i === this.pokemon.id;
     this.pokemonId = this.formatPokemonId();
-    this.isFavourite = false;
-    this.isFavourite = this.auth.currentUserValue.preferences?.indexOf(this.pokemon.id) !== -1;
-
+    this.isFavourite = this.auth.user.preferences.indexOf(this.pokemon.id) !== -1;
   }
+
+
+
   openModal(param: number) {
-    this.carouselSrv.updateCurrentIndex(param);
+    this.carouselSrv.currentIndexSubject.next(param);
     this.modalStatusChange.emit(true);
 
   }
@@ -41,19 +47,17 @@ export class MiniatureComponent implements OnInit {
   }
 
   pushPreferences(id: number) {
-    let preferences: number[] = this.auth.currentUserValue.preferences;
+    let preferences: number[] = this.auth.user.preferences;
     if (this.isFavourite) {
-      preferences = [...preferences.splice(0, preferences.indexOf(id))];
-      this.isFavourite = false
+      preferences.splice(preferences.indexOf(id))
+      this.isFavourite = false;
     }
     else {
-      preferences = [...preferences, id];
+      preferences.push(id);
       this.isFavourite = true;
     };
-    this.auth.updateUser({ ...this.auth.currentUserValue, preferences });
-    console.log(this.auth.currentUserValue.preferences)
-    return this.auth.postFavourite(this.auth.currentUserValue)
-
+    this.userSubject.next({ ...this.auth.user, preferences });
+    return this.auth.postFavourite(this.auth.user)
   }
 
 

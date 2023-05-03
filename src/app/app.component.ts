@@ -7,13 +7,6 @@ import { AuthService } from './core/services/auth/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  /*   title = 'pokedexRouterApp';
-   */
-  state: string = 'closed';
 
   constructor(public auth: AuthService) { }
-
-  openMenuFromHeader(stringValue: string) {
-    return this.state = stringValue;
-  }
 }

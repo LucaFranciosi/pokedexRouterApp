@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable } from "rxjs";
+import { Subject } from "rxjs";
 import { User } from "src/app/model/user/user.model";
 
 
@@ -16,48 +16,31 @@ const httpOptions = {
 @Injectable({ providedIn: 'root' })
 
 export class AuthService {
+    public user: User;
+    public userSubject: Subject<User> = new Subject<User>()
 
-    public currentUserSubject: BehaviorSubject<User>
-    public currentUser$: Observable<User>
-    error: any
-
-
-
-    constructor(
-        private http: HttpClient,
-        private router: Router,
-
-    ) {
-        this.currentUserSubject = new BehaviorSubject<User>(null)
-        this.currentUser$ = this.currentUserSubject.asObservable()
-
+    constructor(private http: HttpClient, private router: Router) {
+        this.userSubject.subscribe(user => this.user = user);
     }
 
-    // function to get the currentUserValue as an object of type User as a return. 
-    public get currentUserValue(): User {
-        return this.currentUserSubject.value;
-    }
 
-    updateUser(user: User) {
-        this.currentUserSubject.next(user);
+    getUserSubject(): Subject<User> {
+        return this.userSubject;
     }
-
 
     login({ email, password }) {
         return this.http.post<User>('http://localhost:4001/login', { email, password }, httpOptions)
             .subscribe(user => {
-
-                this.updateUser({ ...user/* , ['preferences']: []  */ })
                 localStorage.setItem('token', user.token)
+                this.userSubject.next({ ...user, preferences: [] }) /// VEDIAMO SE QUI STA IL PROBLEMA.
                 this.router.navigate(['home'])
             })
 
     }
 
     logout() {
-        localStorage.removeItem('token')
-        this.updateUser(null)
-        this.router.navigate(['login'])
+        this.userSubject.next(null);
+        this.router.navigate(['login']);
     }
 
 
@@ -66,45 +49,29 @@ export class AuthService {
 
         this.http.post<User>("http://localhost:4001/register", { firstName, lastName, email, password }, httpOptions)
             .subscribe(user => {
+                this.userSubject.next(user);
+                localStorage.setItem('token', user.token);
 
-                this.updateUser(user)
-                localStorage.setItem('token', user.token)
-
-            })
+            });
         this.router.navigate([''])
 
     }
 
-    isLogged(): boolean {
-        let isAuth: boolean;
-        this.currentUserValue !== null
-            ? isAuth = true
-            : isAuth = false
-        return isAuth
-    }
+
 
 
     postFavourite(data: User) {
-        this.http.post<Array<number>>('http://localhost:4001/addPreferences', { firstName: data.first_name, preferences: data.preferences }, httpOptions).subscribe({
-            next: (user) => {
-                console.log('res', user)
-
-            },
-            error: (e) => console.error('still can t get why i got this error here!', e)
-        }
-
-
-
-        )
+        this.http.post<number[]>('http://localhost:4001/addPreferences', { firstName: data.first_name, preferences: data.preferences }, httpOptions).subscribe({
+            error: (e) => console.error('something is wrong in DB, but it works just fine!', e)
+        })
     }
 
 
-    getFavourite(user: User) {
-        this.http.get<Array<number>>(`http://localhost:4001/preferences?firstName=${user.first_name}`).subscribe(
+    getFavourite() {
+        this.http.get<number[]>(`http://localhost:4001/preferences?firstName=${this.user.first_name}`).subscribe(
             fav => {
-                this.currentUserValue.preferences = fav;
-                this.updateUser(this.currentUserValue);
-                console.log(this.currentUserValue)
+                this.user.preferences = fav;
+                this.userSubject.next({ ...this.user, preferences: fav });
             }
         )
     }

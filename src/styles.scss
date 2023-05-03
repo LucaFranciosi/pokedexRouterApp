@@ -12,7 +12,15 @@ small {
     margin: 0 1.6rem;
 }
 
+#loadingImg {
+    height: 30rem;
+    width: 30rem;
+    background-image: url("/assets/img/colorPokeball.svg");
+    background-size: cover;
+}
+
 .miniature_wrapper {
+    text-align: center;
     display: flex;
     flex-wrap: wrap;
     max-height: 55rem;

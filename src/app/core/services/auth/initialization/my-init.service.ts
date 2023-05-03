@@ -17,7 +17,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 
-// ERROR : se c'è il token fa la chiamata, altrimenti no!
 export class MyInitService {
   data: User;
 
@@ -29,8 +28,7 @@ export class MyInitService {
         this.http.get<User>('http://localhost:4001/welcome', httpOptions).subscribe(
           res => {
             this.data = { ...res, token }
-            subscriber.next(this.data)
-            this.authService.updateUser(this.data)
+            this.authService.userSubject.next({ ...this.data, preferences: [] })
             this.router.navigate([""])
           });
       }

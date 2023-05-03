@@ -1,9 +1,9 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChange } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, map, } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, Subject, Subscription, } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { PokemonService } from 'src/app/core/services/pokemon/pokemon.service';
+import { FakeService } from 'src/app/core/services/pokemon/fake/fake-service.service';
 import { Pokemon } from 'src/app/model/pokemon/pokemon.model';
 import sortBy from 'src/utils/js/sortBy';
 
@@ -35,22 +35,28 @@ export class FilterComponentComponent implements OnInit {
   isAccordionOpen: string = 'closed';
   filterForm: FormGroup;
   listOfTypes = new Set();
-  pokeTypesControls: FormArray;
   uniqueTypeMatrix: string[] = [];
+  pokeTypesControls: FormArray;
   buttonClearDisabled: boolean = true;
   buttonSelectAllDisabled: boolean = true;
-  defaultList: Pokemon[];
+  pokemonList: Pokemon[];
+  currentList: Pokemon[];
+  pokemonListSubject: Subject<Pokemon[]> = this.fake.getPokemonListSubject();
+  currentListSubject: Subject<Pokemon[]> = this.fake.getCurrentListSubject();
+  userSubject = this.auth.getUserSubject()
+  subscriptions: Subscription;
 
   constructor(
     public fb: FormBuilder,
-    public pokemonSrv: PokemonService,
     public auth: AuthService,
+    public fake: FakeService
   ) {
+    this.subscriptions = this.currentListSubject.subscribe(list => this.currentList = list);
+    this.subscriptions.add(this.pokemonListSubject.subscribe(list => this.pokemonList = list));
 
   }
 
-  ngOnInit(): void {
-    this.pokemonSrv.pokemonList.asObservable().subscribe(val => this.defaultList = val);
+  ngOnInit() {
 
     this.filterForm = this.createForm();
 
@@ -66,22 +72,18 @@ export class FilterComponentComponent implements OnInit {
   }
 
 
-  // FORM INIT
   createFormArray(): FormArray {
-    //set variables
-
     let formArray: FormArray = this.fb.array([]);
-
-    this.pokemonSrv.pokemonList.subscribe(pokemonList => {
-      let typeMatrix: string[] = [];
-
-
+    let typeMatrix: string[] = [];
+    this.pokemonListSubject.subscribe(pokemonList => {
       pokemonList.map(pokemon => typeMatrix.push(pokemon.types[0].type.name));
       this.uniqueTypeMatrix = [...new Set(typeMatrix)];
       this.uniqueTypeMatrix.map((type) => formArray.push(this.fb.control(type)))
-    })
+    });
+
     return formArray;
   }
+
 
   createForm() {
     let group = this.fb.group({
@@ -90,23 +92,24 @@ export class FilterComponentComponent implements OnInit {
       favourites: false,
       pokeTypesControls: this.createFormArray() as AbstractControl
     })
-
     return group
   }
+
 
   onInputChanges(filterFormValue: FilterForm) {
 
     let { order, pokeTypesControls, favourites, input_search } = filterFormValue;
-    let filteredList = sortBy(order, this.defaultList
+
+    this.currentListSubject.next(sortBy(order, this.pokemonList
       .filter((pokemon: Pokemon) => input_search !== null ? pokemon.name.includes(input_search) : pokemon)
       .filter((pokemon: Pokemon) => pokeTypesControls.indexOf(pokemon.types[0].type.name) !== -1)
       .filter((pokemon: Pokemon) =>
         favourites
           ?
-          this.auth.currentUserValue.preferences.indexOf(pokemon.id) !== -1
+          this.auth.user.preferences?.indexOf(pokemon.id) !== -1
           : pokemon)
-    )
-    this.pokemonSrv.currentListSetter(filteredList)
+    ))
+
   }
 
 
@@ -157,6 +160,12 @@ export class FilterComponentComponent implements OnInit {
   selectAll() {
     this.uniqueTypeMatrix.map((type, index) => this.pokeTypesControls.at(index).patchValue(type))
   }
+
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe()
+  }
+
 
 
 }

@@ -1,7 +1,32 @@
 <div class="main_content">
     <h1>FAVOURITES</h1>
     <div class="miniature_wrapper" style="gap: 16px; text-align: center; min-height: 60rem;">
-        <ng-container *ngIf='this.auth.currentUserValue.preferences.length === 0; then noResults; else fav'>
+        <ng-container *ngIf='this.auth.user.preferences.length === 0; then noResults; else fav'>
+        </ng-container>
+    </div>
+
+
+    <ng-template #noResults>
+        <p>NO RESULTS FOUND<br>PLEASE ADD SOME FAVOURITES</p>
+    </ng-template>
+
+
+    <ng-template #fav>
+         {{currentList}}
+       
+    </ng-template>
+
+
+</div>
+
+
+
+
+
+<!-- <div class="main_content">
+    <h1>FAVOURITES</h1>
+    <div class="miniature_wrapper" style="gap: 16px; text-align: center; min-height: 60rem;">
+        <ng-container *ngIf='this.auth.user.preferences.length === 0; then noResults; else fav'>
         </ng-container>
     </div>
 
@@ -10,15 +35,30 @@
         <p>NO RESULTS FOUND<br>PLEASE ADD SOME FAVOURITES</p>
     </ng-template>
     <ng-template #fav>
-        <ng-container *ngFor="let pokemon of this.pokemonSrv.currentListValue 
+        <ng-container *ngFor="let pokemon of currentList;
         let i= index;">
-
-            <app-card *ngIf="this.auth.currentUserValue.preferences.indexOf(pokemon.id) !== -1;" [pokemon]="pokemon"
-                [i]=i>
+            <app-card *ngIf="this.auth.user.preferences.indexOf(pokemon.id) !== -1;" [pokemon]="pokemon" [i]=i>
             </app-card>
         </ng-container>
 
     </ng-template>
 
 
-</div>
+</div> -->
+
+
+
+<!-- <div class="miniature_wrapper">
+
+
+    <app-miniature *ngFor="let pokemon of currentList;
+        let i = index;" [i]='i' [pokemon]="pokemon" [modalStatus]="modalStatus"
+        (modalStatusChange)="handleModalFromHome($event)">
+    </app-miniature>
+
+
+    <ng-container>
+        <p *ngIf="currentList.length === 0 && !this.fake.loading">NO RESULTS FOUND</p>
+        <div *ngIf="this.fake.loading " id="loadingImg"></div>
+    </ng-container>
+</div> -->

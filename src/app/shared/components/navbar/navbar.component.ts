@@ -24,17 +24,11 @@ import { User } from 'src/app/model/user/user.model';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  public user: User;
   @Input() navBarStatus: string;
   @Output() navBarStatusChange = new EventEmitter<string>();
-  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler() {
     this.closeMenu();
   }
-
-
-  constructor(private auth: AuthService) {
-    this.auth.currentUser$.subscribe(u => u = this.user);
-  };
 
 
   closeMenu() {

@@ -51,9 +51,8 @@
             <label for="password"> Password
                 <input type={{this.type}} class="input password" name="password" id="password_input"
                     formControlName="password"></label>
-            <span (click)="handleClick()
-            
-            " [ngClass]="{'eye': true, 'open': isOpen }"></span>
+            <span (click)="handleClick()" 
+            [ngClass]="{'eye': true, 'open': isOpen }"></span>
         </div>
 
         <div *ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)"

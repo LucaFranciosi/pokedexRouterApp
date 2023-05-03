@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { PokemonService } from 'src/app/core/services/pokemon/pokemon.service';
-
+ 
 
 @Component({
   selector: 'app-header',
@@ -9,8 +9,12 @@ import { PokemonService } from 'src/app/core/services/pokemon/pokemon.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  constructor(public auth: AuthService, public pokemonSrv: PokemonService) { }
+  userSubject = this.auth.getUserSubject()
   navBarStatus: string;
+
+
+  constructor(public auth: AuthService, public pokemonSrv: PokemonService) {
+  }
 
 
   logout() {

@@ -21,7 +21,7 @@
         right: 8rem;
     }
 
-    .header {
+    .card_header {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -81,8 +81,6 @@
         }
     }
     .about_info {
-        align-items: center;
-        justify-content: center;
         text-align: center;
         width: 33%;
         text-align: center;
@@ -137,7 +135,10 @@
         }
     }
     #moves {
-        height: 3.2rem;
+        height: 2.4rem;
+        padding-left: 1rem;
+        line-height: 1rem;
+        width: 100%;
     }
     .description {
         display: flex;

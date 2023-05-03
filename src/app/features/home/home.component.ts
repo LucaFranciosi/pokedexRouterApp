@@ -1,6 +1,10 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, } from '@angular/core';
+import { Subject } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { FakeService } from 'src/app/core/services/pokemon/fake/fake-service.service';
 import { PokemonService } from 'src/app/core/services/pokemon/pokemon.service';
+import { Pokemon } from 'src/app/model/pokemon/pokemon.model';
+import { User } from 'src/app/model/user/user.model';
 
 @Component({
   selector: 'app-home',
@@ -10,27 +14,37 @@ import { PokemonService } from 'src/app/core/services/pokemon/pokemon.service';
 })
 
 
-export class HomeComponent implements OnInit {
-  loading: boolean;
+export class HomeComponent {
   modalStatus: boolean = false;
-  showThis = false;
+  currentList: Pokemon[] = [];
+  currentListSubject: Subject<Pokemon[]> = this.fake.getCurrentListSubject();
+  user: User;
+  userSubject = this.auth.getUserSubject()
 
-  constructor(public pokemonSrv: PokemonService, public auth: AuthService) {
+
+  constructor( public auth: AuthService, public fake: FakeService) {
+    this.currentListSubject.subscribe((val: Pokemon[]) => this.currentList = val)
+    this.userSubject.subscribe(val => this.user = val)
   }
 
 
+  ngOnInit() {
+    this.loadApi()
+    this.auth.getFavourite()
+
+
+  }
 
   handleModalFromHome(booleanValue: boolean) {
-
-
     return this.modalStatus = booleanValue;
   }
 
-  ngOnInit() {
-    this.auth.getFavourite(this.auth.currentUserValue)
 
+  loadApi() {
+    this.fake.loadPokemonList(30);
   }
-
-
-
 }
+
+
+
+

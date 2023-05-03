@@ -37,12 +37,7 @@ export class PokemonService {
         return this.isLoading.value
     }
 
-    constructor(private http: HttpClient, private auth: AuthService) {
-        this.getPokemon(30);
-
-    }
-
-
+    constructor(private http: HttpClient) { this.getPokemon(30) }
 
 
     getPokemon(numberOfPokemon: number) {
@@ -55,6 +50,7 @@ export class PokemonService {
             )).subscribe(val => {
                 this.currentList.next(val);
                 this.pokemonList.next(val);
+
                 this.isLoading.next(false)
             })
 
